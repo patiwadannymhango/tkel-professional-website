@@ -8,6 +8,8 @@ import ValuesGrid from "@/components/ValuesGrid";
 import CTASection from "@/components/CTASection";
 import { BrandStrip, ClientStrip } from "@/components/BrandLogos";
 import { Button, Container, SectionHeading } from "@/components/ui";
+import Reveal from "@/components/motion/Reveal";
+import { StaggerGroup, StaggerItem } from "@/components/motion/Stagger";
 import { services } from "@/data/services";
 import { projects } from "@/data/projects";
 
@@ -25,9 +27,13 @@ export default function Home() {
       <StatsBar />
 
       {/* About snapshot */}
-      <section className="bg-white py-20">
-        <Container className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
-          <div>
+      <section className="relative overflow-hidden bg-white py-20">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -right-32 top-1/2 h-96 w-96 -translate-y-1/2 rounded-full bg-gold-400/10 blur-[110px]"
+        />
+        <Container className="relative grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
+          <Reveal direction="right">
             <SectionHeading
               eyebrow="Who We Are"
               title="A Full-Service Engineering & Industrial Supply Partner"
@@ -44,8 +50,8 @@ export default function Home() {
             <Button href="/about" variant="ghost" className="mt-8">
               Learn More About Us
             </Button>
-          </div>
-          <div className="relative h-96 overflow-hidden rounded-xl shadow-lg">
+          </Reveal>
+          <Reveal direction="left" delay={0.1} className="relative h-96 overflow-hidden rounded-2xl shadow-2xl shadow-navy-950/20">
             <Image
               src="/images/about/about-steelwork.jpg"
               alt="TKEL steel erection works"
@@ -53,46 +59,56 @@ export default function Home() {
               sizes="(min-width: 1024px) 50vw, 100vw"
               className="object-cover"
             />
-          </div>
+            <div className="absolute inset-0 bg-gradient-to-t from-navy-950/40 via-transparent to-transparent" />
+          </Reveal>
         </Container>
       </section>
 
       {/* Services */}
-      <section className="bg-navy-50 py-20">
-        <Container>
-          <SectionHeading
-            align="center"
-            eyebrow="What We Do"
-            title="Our Services"
-            description="Comprehensive engineering and industrial supply capability, tailored to mining and industrial clients."
-          />
-          <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <section className="relative overflow-hidden bg-gradient-to-b from-navy-50 to-white py-20">
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-dot-pattern opacity-[0.4]" />
+        <Container className="relative">
+          <Reveal>
+            <SectionHeading
+              align="center"
+              eyebrow="What We Do"
+              title="Our Services"
+              description="Comprehensive engineering and industrial supply capability, tailored to mining and industrial clients."
+            />
+          </Reveal>
+          <StaggerGroup className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {services.map((service) => (
-              <ServiceCard key={service.slug} service={service} />
+              <StaggerItem key={service.slug}>
+                <ServiceCard service={service} />
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerGroup>
         </Container>
       </section>
 
       <ValuesGrid />
 
       {/* Featured Projects */}
-      <section className="bg-navy-50 py-20">
-        <Container>
-          <SectionHeading
-            align="center"
-            eyebrow="Our Work"
-            title="Featured Projects"
-            description="A snapshot of recent mechanical, civil and construction work delivered on active mine sites."
-          />
-          <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <section className="relative overflow-hidden bg-navy-50 py-20">
+        <Container className="relative">
+          <Reveal>
+            <SectionHeading
+              align="center"
+              eyebrow="Our Work"
+              title="Featured Projects"
+              description="A snapshot of recent mechanical, civil and construction work delivered on active mine sites."
+            />
+          </Reveal>
+          <StaggerGroup className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {projects.slice(0, 3).map((project) => (
-              <ProjectCard key={project.slug} project={project} />
+              <StaggerItem key={project.slug}>
+                <ProjectCard project={project} />
+              </StaggerItem>
             ))}
-          </div>
-          <div className="mt-10 text-center">
+          </StaggerGroup>
+          <Reveal className="mt-10 text-center">
             <Button href="/projects" variant="ghost">View All Projects</Button>
-          </div>
+          </Reveal>
         </Container>
       </section>
 

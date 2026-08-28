@@ -4,6 +4,7 @@ import ProjectCard from "@/components/ProjectCard";
 import CTASection from "@/components/CTASection";
 import { ClientStrip } from "@/components/BrandLogos";
 import { Container } from "@/components/ui";
+import { StaggerGroup, StaggerItem } from "@/components/motion/Stagger";
 import { projects } from "@/data/projects";
 
 export const metadata: Metadata = {
@@ -23,13 +24,16 @@ export default function ProjectsPage() {
 
       <ClientStrip />
 
-      <section className="bg-white py-20">
-        <Container>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <section className="relative overflow-hidden bg-white py-20">
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-dot-pattern opacity-[0.35]" />
+        <Container className="relative">
+          <StaggerGroup className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {projects.map((project) => (
-              <ProjectCard key={project.slug} project={project} />
+              <StaggerItem key={project.slug}>
+                <ProjectCard project={project} />
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerGroup>
         </Container>
       </section>
 

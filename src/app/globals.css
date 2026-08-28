@@ -2,33 +2,51 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #14213d;
+  --foreground: #0a1730;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
-  /* Brand palette, sampled from the TKEL logo */
+  /* Brand palette — sampled directly from the TKEL logo (navy #2350A1, cyan #04FDFF,
+     gold #FFEA00), extended into a full ramp for backgrounds/text/accents. */
+  --color-navy-975: #060f21;
   --color-navy-950: #0a1730;
   --color-navy-900: #0f2148;
   --color-navy-800: #15305f;
   --color-navy-700: #1c3f78;
-  --color-navy-600: #254fa3;
-  --color-navy-500: #3562bd;
+  --color-navy-600: #2350a1;
+  --color-navy-500: #3a68c2;
+  --color-navy-400: #6b8fdb;
   --color-navy-200: #c3d2ea;
   --color-navy-100: #dde6f4;
-  --color-navy-50: #f0f4fb;
+  --color-navy-50: #f2f6fc;
 
-  --color-cyan-500: #00c2de;
-  --color-cyan-400: #22d3ee;
+  --color-cyan-600: #00a9c4;
+  --color-cyan-500: #06c8e6;
+  --color-cyan-400: #3ee0f5;
+  --color-cyan-300: #8aeeff;
 
-  --color-gold-600: #d69a00;
+  --color-gold-700: #b57e00;
+  --color-gold-600: #dba100;
   --color-gold-500: #f5b700;
-  --color-gold-400: #ffcc29;
+  --color-gold-400: #ffcf33;
+  --color-gold-300: #ffe066;
 
   --font-sans: var(--font-inter);
   --font-heading: var(--font-oswald);
+
+  --animate-fade-up: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-fade-in: fade-in 0.8s ease forwards;
+  --animate-scale-in: scale-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-float-slow: float 11s ease-in-out infinite;
+  --animate-marquee: marquee 32s linear infinite;
+  --animate-gradient-pan: gradient-pan 8s ease infinite;
+  --animate-shimmer: shimmer 2.5s linear infinite;
+
+  --ease-fluid: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 body {
@@ -43,4 +61,129 @@ h1, h2, h3, h4, .font-heading {
 
 html {
   scroll-behavior: smooth;
+}
+
+::selection {
+  background: var(--color-gold-400);
+  color: var(--color-navy-950);
+}
+
+/* Slim, brand-colored scrollbar (WebKit) */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-navy-50);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-navy-300, #8aa3d6);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-navy-500);
+}
+
+/* ---------- Keyframes ---------- */
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  33% { transform: translate(18px, -24px) rotate(4deg); }
+  66% { transform: translate(-14px, 14px) rotate(-3deg); }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes gradient-pan {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes shimmer {
+  from { background-position: -200% 0; }
+  to { background-position: 200% 0; }
+}
+
+/* ---------- Reusable fluid-motion utilities ---------- */
+
+.bg-grid-pattern {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.bg-dot-pattern {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.14) 1.5px, transparent 1.5px);
+  background-size: 22px 22px;
+}
+
+.text-gradient-gold {
+  background: linear-gradient(100deg, var(--color-gold-300), var(--color-gold-500) 55%, var(--color-cyan-400));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.gradient-pan-bg {
+  background-size: 200% 200%;
+  animation: var(--animate-gradient-pan);
+}
+
+.shimmer-bg {
+  background-image: linear-gradient(
+    100deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.55) 50%,
+    transparent 70%
+  );
+  background-size: 200% 100%;
+  animation: var(--animate-shimmer);
+}
+
+.marquee-track {
+  animation: var(--animate-marquee);
+}
+
+.marquee-row:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

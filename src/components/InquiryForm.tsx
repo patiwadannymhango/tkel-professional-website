@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { AnimatePresence, motion } from "motion/react";
 import { Loader2, CheckCircle2, AlertCircle } from "lucide-react";
 import { services } from "@/data/services";
 
@@ -49,35 +50,52 @@ export default function InquiryForm({
     }
   }
 
-  if (status === "success") {
-    return (
-      <div className="flex flex-col items-center gap-3 rounded-lg border border-green-200 bg-green-50 px-6 py-12 text-center">
-        <CheckCircle2 className="h-12 w-12 text-green-600" />
-        <h3 className="font-heading text-xl font-semibold text-navy-950">Thank you!</h3>
-        <p className="max-w-sm text-sm text-slate-600">
-          {variant === "quote"
-            ? "Your quotation request has been received. Our team will get back to you within 24–48 hours."
-            : variant === "careers"
-            ? "Your application has been received. We'll be in touch if there's a match for your skills."
-            : "Your message has been received. We'll respond as soon as possible."}
-        </p>
-        <button
-          type="button"
-          onClick={() => setStatus("idle")}
-          className="mt-2 font-heading text-sm font-semibold uppercase tracking-wide text-gold-600 hover:text-gold-500"
-        >
-          Send another message
-        </button>
-      </div>
-    );
-  }
-
   const inputClass =
-    "w-full rounded-md border border-navy-200 bg-white px-4 py-2.5 text-sm text-navy-950 placeholder:text-slate-400 focus:border-navy-600 focus:outline-none focus:ring-2 focus:ring-navy-600/20";
+    "w-full rounded-lg border border-navy-200 bg-white px-4 py-2.5 text-sm text-navy-950 placeholder:text-slate-400 transition-all duration-200 focus:border-navy-600 focus:outline-none focus:ring-4 focus:ring-navy-600/15";
   const labelClass = "mb-1.5 block text-sm font-medium text-navy-800";
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5">
+    <AnimatePresence mode="wait">
+      {status === "success" ? (
+        <motion.div
+          key="success"
+          initial={{ opacity: 0, scale: 0.96 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          className="flex flex-col items-center gap-3 rounded-xl border border-green-200 bg-green-50 px-6 py-12 text-center"
+        >
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.1, ease: [0.34, 1.56, 0.64, 1] }}
+          >
+            <CheckCircle2 className="h-12 w-12 text-green-600" />
+          </motion.div>
+          <h3 className="font-heading text-xl font-semibold text-navy-950">Thank you!</h3>
+          <p className="max-w-sm text-sm text-slate-600">
+            {variant === "quote"
+              ? "Your quotation request has been received. Our team will get back to you within 24–48 hours."
+              : variant === "careers"
+              ? "Your application has been received. We'll be in touch if there's a match for your skills."
+              : "Your message has been received. We'll respond as soon as possible."}
+          </p>
+          <button
+            type="button"
+            onClick={() => setStatus("idle")}
+            className="mt-2 font-heading text-sm font-semibold uppercase tracking-wide text-gold-600 transition-colors hover:text-gold-500"
+          >
+            Send another message
+          </button>
+        </motion.div>
+      ) : (
+    <motion.form
+      key="form"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      onSubmit={handleSubmit}
+      className="space-y-5"
+    >
       {/* Honeypot field — hidden from real users, catches bots */}
       <div className="absolute left-[-9999px]" aria-hidden="true">
         <label htmlFor="website">Website</label>
@@ -177,21 +195,36 @@ export default function InquiryForm({
         />
       </div>
 
-      {status === "error" && (
-        <div className="flex items-start gap-2 rounded-md bg-red-50 px-4 py-3 text-sm text-red-700">
-          <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
-          <span>{errorMessage}</span>
-        </div>
-      )}
+      <AnimatePresence>
+        {status === "error" && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="flex items-start gap-2 overflow-hidden rounded-lg bg-red-50 px-4 py-3 text-sm text-red-700"
+          >
+            <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
+            <span>{errorMessage}</span>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-gold-500 px-6 py-3.5 font-heading text-sm font-semibold uppercase tracking-wide text-navy-950 transition-colors hover:bg-gold-400 disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto"
+        className="group relative inline-flex w-full items-center justify-center gap-2 overflow-hidden rounded-full bg-gold-500 px-6 py-3.5 font-heading text-sm font-semibold uppercase tracking-wide text-navy-950 shadow-lg shadow-gold-500/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-gold-400 hover:shadow-xl hover:shadow-gold-500/30 disabled:cursor-not-allowed disabled:translate-y-0 disabled:opacity-70 sm:w-auto sm:px-10"
       >
-        {status === "submitting" && <Loader2 className="h-4 w-4 animate-spin" />}
-        {variant === "quote" ? "Request Quotation" : variant === "careers" ? "Submit Application" : "Send Message"}
+        <span
+          aria-hidden="true"
+          className="shimmer-bg pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        />
+        <span className="relative flex items-center gap-2">
+          {status === "submitting" && <Loader2 className="h-4 w-4 animate-spin" />}
+          {variant === "quote" ? "Request Quotation" : variant === "careers" ? "Submit Application" : "Send Message"}
+        </span>
       </button>
-    </form>
+    </motion.form>
+      )}
+    </AnimatePresence>
   );
 }

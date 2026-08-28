@@ -3,6 +3,8 @@ import { FileSearch, PhoneCall, ClipboardCheck } from "lucide-react";
 import PageHero from "@/components/PageHero";
 import InquiryForm from "@/components/InquiryForm";
 import { Container } from "@/components/ui";
+import Reveal from "@/components/motion/Reveal";
+import { StaggerGroup, StaggerItem } from "@/components/motion/Stagger";
 import { getServiceBySlug } from "@/data/services";
 import { contact } from "@/data/company";
 
@@ -44,31 +46,37 @@ export default async function QuotePage({ searchParams }: Props) {
         description="Tell us about your project and we'll get back to you with a fast, no-obligation quote."
       />
 
-      <section className="bg-white py-20">
-        <Container className="grid grid-cols-1 gap-12 lg:grid-cols-5">
-          <div className="lg:col-span-3">
-            <div className="rounded-xl border border-navy-100 bg-navy-50 p-8">
+      <section className="relative overflow-hidden bg-white py-20">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -right-40 top-10 h-96 w-96 rounded-full bg-gold-400/10 blur-[120px]"
+        />
+        <Container className="relative grid grid-cols-1 gap-12 lg:grid-cols-5">
+          <Reveal direction="right" className="lg:col-span-3">
+            <div className="rounded-2xl border border-navy-100 bg-gradient-to-br from-navy-50 to-white p-8 shadow-sm">
               <InquiryForm variant="quote" initialService={preselected?.title} />
             </div>
-          </div>
+          </Reveal>
 
           <div className="lg:col-span-2">
-            <h2 className="font-heading text-xl font-semibold text-navy-950">What Happens Next</h2>
-            <div className="mt-6 space-y-6">
+            <Reveal direction="left" delay={0.05}>
+              <h2 className="font-heading text-xl font-semibold text-navy-950">What Happens Next</h2>
+            </Reveal>
+            <StaggerGroup className="mt-6 space-y-6">
               {steps.map((step, i) => (
-                <div key={step.title} className="flex gap-4">
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-navy-950 font-heading text-sm font-bold text-gold-500">
+                <StaggerItem key={step.title} className="flex gap-4">
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-navy-950 font-heading text-sm font-bold text-gold-500 shadow-md shadow-navy-950/20">
                     {i + 1}
                   </div>
                   <div>
                     <h3 className="font-heading text-base font-semibold text-navy-950">{step.title}</h3>
                     <p className="mt-1 text-sm leading-relaxed text-slate-600">{step.description}</p>
                   </div>
-                </div>
+                </StaggerItem>
               ))}
-            </div>
+            </StaggerGroup>
 
-            <div className="mt-10 rounded-xl border border-gold-400/40 bg-gold-500/10 p-6">
+            <Reveal direction="left" delay={0.2} className="mt-10 rounded-2xl border border-gold-400/40 bg-gold-500/10 p-6">
               <h3 className="font-heading text-sm font-semibold uppercase tracking-wide text-navy-950">
                 Need it urgently?
               </h3>
@@ -76,14 +84,14 @@ export default async function QuotePage({ searchParams }: Props) {
                 Call or WhatsApp us directly and we&apos;ll prioritise your request.
               </p>
               <div className="mt-4 flex flex-col gap-2 text-sm font-semibold text-navy-950">
-                <a href={`tel:${contact.phonesRaw[0]}`} className="hover:text-gold-600">
+                <a href={`tel:${contact.phonesRaw[0]}`} className="transition-colors hover:text-gold-600">
                   {contact.phones[0]}
                 </a>
-                <a href={`mailto:${contact.email}`} className="hover:text-gold-600">
+                <a href={`mailto:${contact.email}`} className="transition-colors hover:text-gold-600">
                   {contact.email}
                 </a>
               </div>
-            </div>
+            </Reveal>
           </div>
         </Container>
       </section>

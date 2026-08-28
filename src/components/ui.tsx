@@ -70,17 +70,29 @@ export function Button({
   icon?: boolean;
 }) {
   const base =
-    "inline-flex items-center justify-center gap-2 rounded-md px-6 py-3 font-heading text-sm font-semibold uppercase tracking-wide transition-colors duration-150";
+    "group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full px-6 py-3 font-heading text-sm font-semibold uppercase tracking-wide transition-all duration-300 ease-out hover:-translate-y-0.5 active:translate-y-0 active:scale-95";
   const variants: Record<string, string> = {
-    primary: "bg-gold-500 text-navy-950 hover:bg-gold-400",
-    secondary: "bg-navy-800 text-white hover:bg-navy-700",
-    outline: "border-2 border-white text-white hover:bg-white hover:text-navy-950",
+    primary:
+      "bg-gold-500 text-navy-950 shadow-lg shadow-gold-500/25 hover:bg-gold-400 hover:shadow-xl hover:shadow-gold-500/40",
+    secondary: "bg-navy-800 text-white shadow-md shadow-navy-950/20 hover:bg-navy-700",
+    outline: "border-2 border-white/70 text-white backdrop-blur-sm hover:border-white hover:bg-white hover:text-navy-950",
     ghost: "border-2 border-navy-800 text-navy-800 hover:bg-navy-800 hover:text-white",
   };
   return (
     <Link href={href} className={`${base} ${variants[variant]} ${className}`}>
-      {children}
-      {icon && <ArrowRight className="h-4 w-4" aria-hidden />}
+      {variant === "primary" && (
+        <span
+          aria-hidden="true"
+          className="shimmer-bg pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        />
+      )}
+      <span className="relative">{children}</span>
+      {icon && (
+        <ArrowRight
+          className="relative h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+          aria-hidden
+        />
+      )}
     </Link>
   );
 }
