@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, m } from "motion/react";
 import { Menu, X, ChevronDown, Phone } from "lucide-react";
 import { services } from "@/data/services";
 import { contact } from "@/data/company";
@@ -89,7 +89,7 @@ export default function Header() {
                 </Link>
                 <AnimatePresence>
                   {servicesOpen && (
-                    <motion.div
+                    <m.div
                       initial={{ opacity: 0, y: 8, scale: 0.97 }}
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 8, scale: 0.97 }}
@@ -111,7 +111,7 @@ export default function Header() {
                       >
                         View all services →
                       </Link>
-                    </motion.div>
+                    </m.div>
                   )}
                 </AnimatePresence>
               </div>
@@ -152,7 +152,7 @@ export default function Header() {
 
       <AnimatePresence>
         {mobileOpen && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
@@ -187,7 +187,7 @@ export default function Header() {
                 Request a Quote
               </Link>
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </header>

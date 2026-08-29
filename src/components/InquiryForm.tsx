@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, m } from "motion/react";
 import { Loader2, CheckCircle2, AlertCircle } from "lucide-react";
 import { services } from "@/data/services";
 
@@ -57,20 +57,20 @@ export default function InquiryForm({
   return (
     <AnimatePresence mode="wait">
       {status === "success" ? (
-        <motion.div
+        <m.div
           key="success"
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-col items-center gap-3 rounded-xl border border-green-200 bg-green-50 px-6 py-12 text-center"
         >
-          <motion.div
+          <m.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ duration: 0.5, delay: 0.1, ease: [0.34, 1.56, 0.64, 1] }}
           >
             <CheckCircle2 className="h-12 w-12 text-green-600" />
-          </motion.div>
+          </m.div>
           <h3 className="font-heading text-xl font-semibold text-navy-950">Thank you!</h3>
           <p className="max-w-sm text-sm text-slate-600">
             {variant === "quote"
@@ -86,9 +86,9 @@ export default function InquiryForm({
           >
             Send another message
           </button>
-        </motion.div>
+        </m.div>
       ) : (
-    <motion.form
+    <m.form
       key="form"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -197,7 +197,7 @@ export default function InquiryForm({
 
       <AnimatePresence>
         {status === "error" && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
@@ -205,7 +205,7 @@ export default function InquiryForm({
           >
             <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
             <span>{errorMessage}</span>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
 
@@ -223,7 +223,7 @@ export default function InquiryForm({
           {variant === "quote" ? "Request Quotation" : variant === "careers" ? "Submit Application" : "Send Message"}
         </span>
       </button>
-    </motion.form>
+    </m.form>
       )}
     </AnimatePresence>
   );

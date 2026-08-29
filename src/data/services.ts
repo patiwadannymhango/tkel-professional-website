@@ -15,7 +15,7 @@ export const services: Service[] = [
     shortTitle: "Mechanical",
     summary:
       "Installation, fabrication and maintenance of industrial mechanical equipment for mining, processing and manufacturing plants.",
-    heroImage: "/images/products/pump-heavy-duty-slurry.png",
+    heroImage: "/images/products/pump-heavy-duty-slurry.jpg",
     bullets: [
       "Industrial equipment installation & commissioning",
       "Plant and workshop fabrication (structural steel, sheds, platforms)",

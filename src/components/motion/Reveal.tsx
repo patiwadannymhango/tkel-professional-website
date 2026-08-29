@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, type Variants } from "motion/react";
+import { m, type Variants } from "motion/react";
 import type { ReactNode } from "react";
 
 type Direction = "up" | "down" | "left" | "right" | "none";
@@ -41,7 +41,7 @@ export default function Reveal({
   };
 
   return (
-    <motion.div
+    <m.div
       className={className}
       initial="hidden"
       whileInView="show"
@@ -49,6 +49,6 @@ export default function Reveal({
       variants={variants}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 }

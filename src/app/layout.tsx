@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import { Inter, Oswald } from "next/font/google";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import MotionProvider from "@/components/motion/MotionProvider";
 import { contact } from "@/data/company";
 
 const inter = Inter({
@@ -79,10 +82,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
-        <WhatsAppButton />
+        <MotionProvider>
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Footer />
+          <WhatsAppButton />
+        </MotionProvider>
+        <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );
