@@ -22,7 +22,7 @@ const oswald = Oswald({
   display: "swap",
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.tripplekeng.com";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.tripplekeng.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
