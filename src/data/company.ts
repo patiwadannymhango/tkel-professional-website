@@ -1,7 +1,7 @@
 export const stats = [
   { value: "100+", label: "Projects Completed" },
   { value: "8+", label: "Years of Experience" },
-  { value: "50+", label: "Skilled Professionals" },
+  { value: "150+", label: "Skilled Professionals" },
   { value: "24/7", label: "Service Availability" },
 ];
 

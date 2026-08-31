@@ -16,7 +16,7 @@ import { projects } from "@/data/projects";
 const aboutHighlights = [
   "Mechanical, electrical & civil engineering under one roof",
   "Authorised Grundfos & Pedrollo pump supplier",
-  "Large-scale labor hire for mining shutdowns",
+  "Large-scale labor hire for mining shutdowns — mechanical, electrical & civil engineering trades",
   "Based in Kitwe — serving mine sites across Zambia",
 ];
 
