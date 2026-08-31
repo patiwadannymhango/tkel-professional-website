@@ -14,6 +14,14 @@ const timelineOptions = [
   "Still planning",
 ];
 
+const SUBJECTS: Record<Variant, string> = {
+  quote: "New Quotation Request — TKEL Website",
+  contact: "New Contact Enquiry — TKEL Website",
+  careers: "New Job Application — TKEL Careers",
+};
+
+const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
+
 export default function InquiryForm({
   variant,
   initialService,
@@ -29,24 +37,57 @@ export default function InquiryForm({
     setStatus("submitting");
     setErrorMessage("");
 
-    const formData = new FormData(e.currentTarget);
-    const payload = Object.fromEntries(formData.entries());
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const { website, ...payload } = Object.fromEntries(formData.entries());
+
+    // Honeypot: bots fill every field, real visitors never see this one.
+    // Pretend success without actually sending anything.
+    if (website) {
+      setStatus("success");
+      form.reset();
+      return;
+    }
+
+    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
+    if (!accessKey) {
+      setStatus("error");
+      setErrorMessage(
+        "The enquiry form isn't fully set up yet. Please contact us directly by phone or email in the meantime."
+      );
+      return;
+    }
+
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 15000);
 
     try {
-      const res = await fetch("/api/submit", {
+      const res = await fetch(WEB3FORMS_ENDPOINT, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ type: variant, ...payload }),
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          access_key: accessKey,
+          subject: SUBJECTS[variant],
+          from_name: "TKEL Website",
+          ...payload,
+        }),
+        signal: controller.signal,
       });
-      const data = await res.json();
-      if (!res.ok || !data.success) {
-        throw new Error(data.error || "Something went wrong. Please try again.");
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || data.success !== true) {
+        throw new Error(data.message || "Something went wrong. Please try again.");
       }
       setStatus("success");
-      e.currentTarget.reset();
+      form.reset();
     } catch (err) {
       setStatus("error");
-      setErrorMessage(err instanceof Error ? err.message : "Something went wrong. Please try again.");
+      setErrorMessage(
+        err instanceof Error && err.name !== "AbortError"
+          ? err.message
+          : "We couldn't send your message. Please try again or contact us directly."
+      );
+    } finally {
+      clearTimeout(timeout);
     }
   }
 
