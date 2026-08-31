@@ -60,11 +60,10 @@ export const roleCategories = [
 export const contact = {
   phones: ["+260 966 893 921", "+260 970 170 151"],
   phonesRaw: ["+260966893921", "+260970170151"],
-  email: "sales@tripplekeng.com",
+  email: "sales.tripplekengineering@gmail.com",
   addressLines: [
-    "Bowmaker House, 4th Floor, Suite 440",
-    "City Square, Kitwe, Zambia",
-    "P.O. Box 22584, Kitwe",
+    "Nkana East 16th Street House 7",
+    "Kitwe, Zambia",
   ],
   hours: "Mon – Fri: 08:00 – 18:00",
   whatsapp: "https://wa.me/260966893921",
