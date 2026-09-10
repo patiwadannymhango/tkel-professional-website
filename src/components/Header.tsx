@@ -13,6 +13,7 @@ const navLinks = [
   { href: "/about", label: "About" },
   { href: "/services", label: "Services", hasDropdown: true },
   { href: "/products", label: "Products" },
+  { href: "/brands", label: "Brands" },
   { href: "/projects", label: "Projects" },
   { href: "/careers", label: "Careers" },
   { href: "/contact", label: "Contact" },
