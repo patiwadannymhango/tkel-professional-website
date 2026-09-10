@@ -1,4 +1,6 @@
 import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { brands, clients } from "@/data/brands";
 import { Container, SectionHeading } from "@/components/ui";
 import Reveal from "@/components/motion/Reveal";
@@ -36,6 +38,18 @@ export function BrandStrip() {
           ))}
         </Marquee>
       </div>
+
+      <Container className="mt-10 text-center">
+        <Reveal>
+          <Link
+            href="/brands"
+            className="group inline-flex items-center gap-1.5 font-heading text-sm font-semibold uppercase tracking-wide text-navy-700 transition-colors hover:text-gold-600"
+          >
+            Explore all brands we supply
+            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden />
+          </Link>
+        </Reveal>
+      </Container>
     </section>
   );
 }
