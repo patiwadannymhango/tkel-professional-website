@@ -1,9 +1,14 @@
+export type ProductImage = {
+  src: string;
+  caption: string;
+};
+
 export type ProductCategory = {
   slug: string;
   title: string;
   intro: string;
   image?: string;
-  groups: { heading: string; items: string[] }[];
+  groups: { heading: string; items: string[]; gallery?: ProductImage[] }[];
 };
 
 export const productCategories: ProductCategory[] = [
@@ -126,6 +131,85 @@ export const productCategories: ProductCategory[] = [
           "SIMODRIVE — converter systems",
           "SIMATIC 200pro — distributed I/O",
           "LOHER DYNAVERT — drive systems",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "power-supply",
+    title: "Power Cables, Transmission & Metering",
+    intro:
+      "Cabling, overhead line equipment, energy metering and circuit protection — supplied and installed across the full rating range, from main incomer breakers down to final-circuit protection.",
+    image: "/images/products/transmission-hero.jpg",
+    groups: [
+      {
+        heading: "Power Cables",
+        items: [
+          "LV & MV power cables (PVC / XLPE insulated)",
+          "Armoured cables (SWA/SWB) for underground & exposed runs",
+          "Control & instrumentation cables",
+          "Overhead conductors (ACSR, AAC, AAAC)",
+          "Cable joints, terminations & glands",
+          "Cable trays, ladders & conduit systems",
+        ],
+        gallery: [
+          { src: "/images/products/cable-mv-coil.jpg", caption: "MV power cable" },
+          { src: "/images/products/cable-submarine-spool.jpg", caption: "Cable drum & reel" },
+        ],
+      },
+      {
+        heading: "Transmission Line Equipment",
+        items: [
+          "Overhead line construction & stringing",
+          "Transmission towers, poles & cross-arms",
+          "Insulators (pin, disc & post type)",
+          "Line hardware & fittings (clamps, spacers, dampers)",
+          "Earthing & lightning protection systems",
+          "Line maintenance & fault repair",
+        ],
+        gallery: [
+          { src: "/images/products/transmission-line-towers.jpg", caption: "Transmission line towers" },
+          { src: "/images/products/transmission-tower-closeup.jpg", caption: "HV transmission tower" },
+        ],
+      },
+      {
+        heading: "Energy Metering",
+        items: [
+          "Single & three-phase energy meters",
+          "Prepaid & smart (AMR) meters",
+          "CT-operated meters for high-current installations",
+          "Meter reading, verification & calibration support",
+          "Meter panel & kiosk installation",
+        ],
+        gallery: [
+          { src: "/images/products/meter-reading-dial.jpg", caption: "Meter reading" },
+          { src: "/images/products/meter-smart-digital.jpg", caption: "Smart digital meter" },
+        ],
+      },
+      {
+        heading: "Circuit Breakers — Highest to Lowest Rating",
+        items: [
+          "Air Circuit Breakers (ACB) — up to 6,300A, main intake & bulk supply",
+          "Moulded Case Circuit Breakers (MCCB) — up to 1,600–2,500A, distribution boards & feeders",
+          "Miniature Circuit Breakers (MCB) — up to 125A, final circuits & sub-boards",
+          "Residual Current Devices (RCD/RCBO) — up to 63A, earth-leakage & personnel protection",
+        ],
+        gallery: [
+          { src: "/images/products/breaker-hv-substation.jpg", caption: "HV / substation breaker" },
+          { src: "/images/products/breaker-mccb.jpg", caption: "MCCB — 630A" },
+          { src: "/images/products/breaker-mcb.jpg", caption: "MCB" },
+          { src: "/images/products/breaker-rcbo.jpg", caption: "RCD / RCBO" },
+        ],
+      },
+      {
+        heading: "Transformers & Substation Equipment",
+        items: [
+          "Distribution transformers",
+          "Substation switchgear & protection",
+          "Transformer installation & maintenance",
+        ],
+        gallery: [
+          { src: "/images/products/transformer-distribution.jpg", caption: "Distribution transformer" },
         ],
       },
     ],

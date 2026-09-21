@@ -79,7 +79,7 @@ export const brands: Brand[] = [
     category: "Power & Motor Control",
     blurb:
       "ABB circuit breakers, contactors, motor starters and ACS drives for power distribution and motor control across mining and process plants.",
-    productsHref: "/products#general-industrial-supply",
+    productsHref: "/products#power-supply",
     images: [
       { src: "/images/brands/abb/abb-product-range.webp", caption: "ABB control & automation range" },
       { src: "/images/brands/abb/abb-s200m-circuit-breaker.webp", caption: "S200M miniature circuit breaker" },
@@ -92,7 +92,7 @@ export const brands: Brand[] = [
     category: "Power & Automation",
     blurb:
       "Schneider Electric switchgear, contactors, variable speed drives, HMIs and protection devices for industrial power and automation systems.",
-    productsHref: "/products#general-industrial-supply",
+    productsHref: "/products#power-supply",
     images: [
       { src: "/images/brands/schneider-electric/schneider-automation-range.webp", caption: "Schneider Electric automation range" },
     ],
@@ -131,7 +131,7 @@ export const brands: Brand[] = [
     category: "Circuit Protection",
     blurb:
       "Bussmann series fuses and fuse gear from Eaton — NH/HRC, Low-Peak, IEC and specialty fuses for circuit and equipment protection.",
-    productsHref: "/products#general-industrial-supply",
+    productsHref: "/products#power-supply",
     images: [
       { src: "/images/brands/cooper-bussmann/bussmann-nh-hrc-fuses.webp", caption: "NH / HRC fuse links" },
       { src: "/images/brands/cooper-bussmann/bussmann-low-peak-fuses.webp", caption: "Low-Peak time-delay fuses" },
