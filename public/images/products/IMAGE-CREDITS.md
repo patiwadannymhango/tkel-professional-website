@@ -17,10 +17,9 @@ Downloaded, resized and re-encoded for this site — originals untouched.
 | breaker-rcbo.jpg | Pfnicholls | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Residual_Current_Circuit_Breaker.JPG |
 | transformer-distribution.jpg | Yoshieslunchbox | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Distribution_Transformer_1.jpg |
 
-The two energy-metering photos below were supplied by the client directly
-(not from Wikimedia Commons) and carry no third-party license requirement:
+The energy-metering photo below was supplied by the client directly (not from
+Wikimedia Commons) and carries no third-party license requirement:
 
 | File | Source |
 |---|---|
-| meter-prepaid-installed.jpg | Client-supplied photo of an on-site installed prepaid meter |
 | meter-prepaid-keypad.jpg | Client-supplied illustrative image of a prepaid meter keypad |

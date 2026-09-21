@@ -182,8 +182,7 @@ export const productCategories: ProductCategory[] = [
           "Meter panel & kiosk installation",
         ],
         gallery: [
-          { src: "/images/products/meter-prepaid-installed.jpg", caption: "Installed prepaid meter" },
-          { src: "/images/products/meter-prepaid-keypad.jpg", caption: "Prepaid meter keypad" },
+          { src: "/images/products/meter-prepaid-keypad.jpg", caption: "Prepaid meter" },
         ],
       },
       {
