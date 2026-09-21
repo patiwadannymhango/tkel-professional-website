@@ -182,8 +182,8 @@ export const productCategories: ProductCategory[] = [
           "Meter panel & kiosk installation",
         ],
         gallery: [
-          { src: "/images/products/meter-reading-dial.jpg", caption: "Meter reading" },
-          { src: "/images/products/meter-smart-digital.jpg", caption: "Smart digital meter" },
+          { src: "/images/products/meter-prepaid-installed.jpg", caption: "Installed prepaid meter" },
+          { src: "/images/products/meter-prepaid-keypad.jpg", caption: "Prepaid meter keypad" },
         ],
       },
       {
